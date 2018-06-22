@@ -1,0 +1,11 @@
+
+###> jetbrain/phpstorm ###
+.idea/
+###< jetbrain/phpstorm ###
+
+###> symfony/framework-bundle ###
+/.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
