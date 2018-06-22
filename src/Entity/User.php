@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -35,6 +37,18 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @var Collection The UserQuestionAnswer of User
+     *
+     * @ORM\OneToMany(targetEntity="UserQuestionAnswer", mappedBy="user")
+     */
+    private $userQuestionAnswers;
+
+    public function __construct()
+    {
+        $this->userQuestionAnswers = new ArrayCollection();
+    }
 
     /**
      * {@inheritdoc}
@@ -101,6 +115,24 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getUserQuestionAnswers(): Collection
+    {
+        return $this->userQuestionAnswers;
+    }
+
+    /**
+     * @param Collection $userQuestionAnswers
+     * @return User
+     */
+    public function setUserQuestionAnswers(Collection $userQuestionAnswers): self
+    {
+        $this->userQuestionAnswers = $userQuestionAnswers;
         return $this;
     }
 }
