@@ -44,17 +44,17 @@ class Question
     private $quizQuestions;
 
     /**
-     * @var Collection The QuizTheme of Question
+     * @var Collection The QuestionTheme of Question
      *
-     * @ORM\OneToMany(targetEntity="QuizTheme", mappedBy="question")
+     * @ORM\OneToMany(targetEntity="QuestionTheme", mappedBy="question")
      */
-    private $quizThemes;
+    private $questionThemes;
 
     public function __construct()
     {
         $this->questionAnswers = new ArrayCollection();
         $this->quizQuestions = new ArrayCollection();
-        $this->quizThemes = new ArrayCollection();
+        $this->questionThemes = new ArrayCollection();
     }
 
     /**
@@ -122,18 +122,18 @@ class Question
     /**
      * @return Collection
      */
-    public function getQuizThemes(): Collection
+    public function getQuestionThemes(): Collection
     {
-        return $this->quizThemes;
+        return $this->questionThemes;
     }
 
     /**
-     * @param Collection $quizThemes
+     * @param Collection $questionThemes
      * @return Question
      */
-    public function setQuizThemes(Collection $quizThemes): self
+    public function setQuestionThemes(Collection $questionThemes): self
     {
-        $this->quizThemes = $quizThemes;
+        $this->questionThemes = $questionThemes;
         return $this;
     }
 }
