@@ -17,6 +17,6 @@ class DashboardController extends AbstractController
      */
     public function homepage(): Response
     {
-        return new Response("Mock");
+        return $this->render('dashboard/homepage.html.twig');
     }
 }
