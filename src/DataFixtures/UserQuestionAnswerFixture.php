@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\QuestionAnswer;
 use App\Entity\User;
 use App\Entity\UserQuestionAnswer;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -13,13 +14,17 @@ class UserQuestionAnswerFixture extends Fixture implements DependentFixtureInter
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         /** @var User $user */
         $user = $this->getReference('user');
 
+        /** @var QuestionAnswer $questionAnswer */
+        $questionAnswer = $this->getReference('questionAnswer');
+
         $userQuestionAnswer = (new UserQuestionAnswer())
-            ->setUser($user);
+            ->setUser($user)
+            ->setQuestionAnswer($questionAnswer);
         $manager->persist($userQuestionAnswer);
 
         $manager->flush();
@@ -30,10 +35,11 @@ class UserQuestionAnswerFixture extends Fixture implements DependentFixtureInter
     /**
      * {@inheritdoc}
      */
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             UserFixture::class,
+            QuestionAnswerFixture::class
         ];
     }
 }
