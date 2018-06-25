@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    @todo
+    {% for quiz in quizzes %}
+        <p>{{ quiz.name }}</p>
+    {% else %}
+        <p>Il n'y a actuellement aucun quiz.</p>
+    {% endfor %}
 {% endblock %}

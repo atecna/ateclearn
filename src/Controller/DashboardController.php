@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\BusinessService\QuizBusinessService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,10 +14,16 @@ class DashboardController extends AbstractController
 {
     /**
      * @Route("", name="homepage")
+     * @param QuizBusinessService $quizBusinessService
      * @return Response
      */
-    public function homepage(): Response
+    public function homepage(QuizBusinessService $quizBusinessService): Response
     {
-        return $this->render('dashboard/homepage.html.twig');
+        $quizzes = $quizBusinessService->getAll();
+
+        return $this->render('dashboard/homepage.html.twig', [
+                "quizzes" => $quizzes,
+            ]
+        );
     }
 }
